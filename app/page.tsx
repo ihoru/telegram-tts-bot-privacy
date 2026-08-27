@@ -178,7 +178,7 @@ export default function Home() {
               The site has no user account, form, application database, analytics, or
               advertising code. Its code does not set cookies. The hosting platform may
               process standard request information such as IP address, user agent, and
-              request logs to deliver and protect the page.
+              request logs, and may set security cookies to deliver and protect the page.
             </p>
           </section>
 
@@ -294,7 +294,8 @@ export default function Home() {
               На сайте нет учетных записей, форм, базы данных приложения, аналитики и
               рекламного кода. Код сайта не устанавливает cookie. Платформа хостинга
               может обрабатывать стандартные данные запроса, например IP-адрес, user
-              agent и журналы запросов, чтобы показывать и защищать страницу.
+              agent и журналы запросов, а также устанавливать защитные cookie, чтобы
+              показывать и защищать страницу.
             </p>
           </section>
 
