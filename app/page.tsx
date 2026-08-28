@@ -51,7 +51,7 @@ export default function Home() {
           <div className="policy-meta">
             <span>Effective {effectiveDate}</span>
             <span lang="ru">Действует с {effectiveDateRu}</span>
-            <span>Version 1.1</span>
+            <span>Version 1.2</span>
           </div>
         </div>
 
@@ -66,8 +66,11 @@ export default function Home() {
           </div>
           <div className="signal-card">
             <span className="signal-number">02</span>
-            <strong>No message history</strong>
-            <p>The application has no database of messages or generated audio.</p>
+            <strong>Bounded memory only</strong>
+            <p>
+              Queued text is not persisted and waits no more than ten minutes before
+              rendering starts.
+            </p>
           </div>
           <div className="signal-card">
             <span className="signal-number">03</span>
@@ -112,7 +115,7 @@ export default function Home() {
               When you message Vslukh, Telegram delivers a message update to the bot.
               The application uses the text you send or forward, your Telegram
               language code, numeric user ID, chat type, and message/reply identifiers
-              needed to localize the response, apply usage limits, and reply.
+              needed to localize the response, manage the queue fairly, and reply.
             </p>
             <p>
               Telegram updates may contain additional message metadata. Vslukh does
@@ -129,7 +132,8 @@ export default function Home() {
             <ul>
               <li>confirm that the request is an eligible private-chat message;</li>
               <li>choose Russian or English interface text;</li>
-              <li>enforce global and per-user concurrent-use limits;</li>
+              <li>enforce global and per-user capacity limits and schedule work fairly;</li>
+              <li>report queue, rendering, and reply progress;</li>
               <li>generate and encode a voice note locally; and</li>
               <li>send that voice note back as a reply.</li>
             </ul>
@@ -144,12 +148,21 @@ export default function Home() {
               <span>3</span> Storage and operational logs
             </h3>
             <p>
-              Message text, temporary WAV data, and the finished OGG voice note stay
-              in process memory while a request is rendered and uploaded. The numeric
-              user ID is held in an in-memory admission map while work is active. The
-              application does not write this material to a database, message history,
-              cache, or audio archive. Memory is released through normal runtime
-              cleanup; this is not a promise of secure memory erasure.
+              Accepted message text and minimal routing identifiers may remain in the
+              process-only queue for at most ten minutes before rendering starts. Queue
+              state is used only for capacity, fairness, progress, rendering, and
+              replies. Temporary WAV data and the finished OGG voice note also stay in
+              process memory while a request is rendered and uploaded. The application
+              does not write any of this material to a database, message history, cache,
+              or audio archive. Memory is released through normal runtime cleanup; this
+              is not a promise of secure memory erasure.
+            </p>
+            <p>
+              Accepted work and queue state are not persisted. They may be lost during
+              a crash or restart. Graceful-shutdown notices are best-effort and cannot be
+              guaranteed during forced termination or a Telegram outage. A request that
+              has waited ten minutes without starting expires, its text is released, and
+              it is never rendered later.
             </p>
             <p>
               Content-free operational logs may be retained by the bot&apos;s hosting
@@ -229,7 +242,7 @@ export default function Home() {
               сообщением. Приложение использует отправленный или пересланный текст, код
               языка Telegram, числовой идентификатор пользователя, тип чата, а также
               идентификаторы сообщения и ответа. Это нужно для выбора языка интерфейса,
-              ограничения одновременных запросов и отправки ответа.
+              справедливого управления очередью и отправки ответа.
             </p>
             <p>
               Обновление Telegram может содержать дополнительные данные о сообщении.
@@ -246,7 +259,8 @@ export default function Home() {
             <ul>
               <li>проверить, что запрос пришел из поддерживаемого личного чата;</li>
               <li>выбрать русский или английский текст интерфейса;</li>
-              <li>применить общие и пользовательские ограничения нагрузки;</li>
+              <li>применить общие и пользовательские ограничения вместимости и справедливо распределить очередь;</li>
+              <li>сообщить об ожидании, создании и отправке ответа;</li>
               <li>локально создать и закодировать голосовую заметку;</li>
               <li>отправить голосовую заметку ответом на сообщение.</li>
             </ul>
@@ -261,12 +275,22 @@ export default function Home() {
               <span>3</span> Хранение и технические журналы
             </h3>
             <p>
-              Текст сообщения, временные WAV-данные и готовая голосовая заметка OGG
-              находятся в памяти процесса во время создания и отправки ответа. Числовой
-              идентификатор пользователя временно находится в таблице активных задач в
-              памяти. Приложение не записывает эти данные в базу, историю сообщений, кэш
+              Текст принятого сообщения и минимальные идентификаторы маршрутизации могут
+              находиться только в памяти процесса в очереди не более десяти минут до
+              начала озвучивания. Состояние очереди используется только для ограничения
+              вместимости, справедливого распределения, уведомлений о ходе работы,
+              озвучивания и отправки ответов. Временные WAV-данные и готовая голосовая
+              заметка OGG также находятся в памяти процесса во время создания и отправки
+              ответа. Приложение не записывает эти данные в базу, историю сообщений, кэш
               или аудиоархив. Память освобождается обычными средствами среды выполнения;
               это не обещание безопасного стирания памяти.
+            </p>
+            <p>
+              Принятые задачи и состояние очереди не сохраняются. Они могут быть потеряны
+              при сбое или перезапуске. Уведомления при штатном завершении отправляются по
+              возможности и не гарантируются при принудительной остановке или недоступности
+              Telegram. Если запрос не начал выполняться за десять минут, срок ожидания
+              истекает, текст освобождается из памяти, и запрос позже не озвучивается.
             </p>
             <p>
               Инфраструктура хостинга может сохранять технические журналы без содержимого

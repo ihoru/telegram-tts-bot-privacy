@@ -35,7 +35,13 @@ test("server-renders the complete bilingual privacy policy", async () => {
   assert.match(html, /Политика конфиденциальности/);
   assert.match(html, /28 August 2026/);
   assert.match(html, /28 августа 2026 года/);
-  assert.match(html, /Version 1\.1/);
+  assert.match(html, /Version 1\.2/);
+  assert.match(html, /at most ten minutes before rendering starts/i);
+  assert.match(html, /Accepted work and queue state are not persisted/i);
+  assert.match(html, /Queue state is used only for capacity, fairness, progress, rendering, and replies/i);
+  assert.match(html, /не более десяти минут до начала озвучивания/i);
+  assert.match(html, /Принятые задачи и состояние очереди не сохраняются/i);
+  assert.match(html, /используется только для ограничения вместимости/i);
   assert.match(html, /Qwen3-TTS or Silero/);
   assert.match(html, /no cloud TTS provider receives the text/i);
   assert.match(html, /не передается облачному TTS-провайдеру/i);
