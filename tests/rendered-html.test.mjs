@@ -33,11 +33,14 @@ test("server-renders the complete bilingual privacy policy", async () => {
   assert.match(html, /Your words become a voice note/);
   assert.match(html, /Privacy Policy/);
   assert.match(html, /Политика конфиденциальности/);
-  assert.match(html, /27 August 2026/);
-  assert.match(html, /27 августа 2026 года/);
+  assert.match(html, /28 August 2026/);
+  assert.match(html, /28 августа 2026 года/);
+  assert.match(html, /Version 1\.1/);
+  assert.match(html, /Qwen3-TTS or Silero/);
   assert.match(html, /no cloud TTS provider receives the text/i);
   assert.match(html, /не передается облачному TTS-провайдеру/i);
   assert.match(html, /https:\/\/telegram\.org\/privacy/);
+  assert.doesNotMatch(html, /Piper|Russian speech|Russian voice note/i);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape/);
 });
 

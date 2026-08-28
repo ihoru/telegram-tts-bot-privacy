@@ -7,8 +7,8 @@ export const metadata: Metadata = {
     "How Vslukh processes Telegram text and voice notes, in English and Russian.",
 };
 
-const effectiveDate = "27 August 2026";
-const effectiveDateRu = "27 августа 2026 года";
+const effectiveDate = "28 August 2026";
+const effectiveDateRu = "28 августа 2026 года";
 
 export default function Home() {
   return (
@@ -43,15 +43,15 @@ export default function Home() {
             Ваш текст превращается в голосовую заметку, а не в запись в базе данных.
           </p>
           <p className="hero-summary">
-            Vslukh turns text sent in a private Telegram chat into Russian speech.
-            This page explains the small amount of data needed to do that, what the
-            application does not retain, and where Telegram and hosting providers
-            have their own responsibilities.
+            Vslukh turns text sent in a private Telegram chat into a voice note. This
+            page explains the small amount of data needed to do that, what the
+            application does not retain, and where Telegram and hosting providers have
+            their own responsibilities.
           </p>
           <div className="policy-meta">
             <span>Effective {effectiveDate}</span>
             <span lang="ru">Действует с {effectiveDateRu}</span>
-            <span>Version 1.0</span>
+            <span>Version 1.1</span>
           </div>
         </div>
 
@@ -59,7 +59,10 @@ export default function Home() {
           <div className="signal-card">
             <span className="signal-number">01</span>
             <strong>Local speech</strong>
-            <p>Piper and FFmpeg process the text on the bot host.</p>
+            <p>
+              Qwen3-TTS or Silero, together with FFmpeg, process text and audio on the
+              bot host.
+            </p>
           </div>
           <div className="signal-card">
             <span className="signal-number">02</span>
@@ -127,7 +130,7 @@ export default function Home() {
               <li>confirm that the request is an eligible private-chat message;</li>
               <li>choose Russian or English interface text;</li>
               <li>enforce global and per-user concurrent-use limits;</li>
-              <li>generate and encode a Russian voice note locally; and</li>
+              <li>generate and encode a voice note locally; and</li>
               <li>send that voice note back as a reply.</li>
             </ul>
             <p>
@@ -162,11 +165,12 @@ export default function Home() {
               <span>4</span> Services involved
             </h3>
             <p>
-              Piper and FFmpeg perform speech generation and audio encoding locally on
-              the bot host; no cloud TTS provider receives the text. Telegram still
-              receives the incoming message and outgoing voice note because it provides
-              the messaging service. The bot host may process ordinary infrastructure
-              data needed to run and secure the service.
+              Depending on the configured voice, the locally hosted Qwen3-TTS or Silero
+              model generates speech and FFmpeg encodes the audio on the bot host; no
+              cloud TTS provider receives the text. Telegram still receives the incoming
+              message and outgoing voice note because it provides the messaging service.
+              The bot host may process ordinary infrastructure data needed to run and
+              secure the service.
             </p>
           </section>
 
@@ -243,7 +247,7 @@ export default function Home() {
               <li>проверить, что запрос пришел из поддерживаемого личного чата;</li>
               <li>выбрать русский или английский текст интерфейса;</li>
               <li>применить общие и пользовательские ограничения нагрузки;</li>
-              <li>локально создать и закодировать русскую голосовую заметку;</li>
+              <li>локально создать и закодировать голосовую заметку;</li>
               <li>отправить голосовую заметку ответом на сообщение.</li>
             </ul>
             <p>
@@ -278,7 +282,8 @@ export default function Home() {
               <span>4</span> Участвующие сервисы
             </h3>
             <p>
-              Piper и FFmpeg создают и кодируют речь локально на сервере бота; текст не
+              В зависимости от выбранного голоса локально размещенная модель Qwen3-TTS
+              или Silero создает речь, а FFmpeg кодирует аудио на сервере бота; текст не
               передается облачному TTS-провайдеру. Telegram все равно получает входящее
               сообщение и исходящую голосовую заметку, поскольку предоставляет сервис
               обмена сообщениями. Хостинг бота может обрабатывать обычные технические
@@ -331,7 +336,7 @@ export default function Home() {
           <Image src="/vslukh-avatar.svg" alt="" width={36} height={36} />
           <span>
             <strong>Vslukh · Вслух</strong>
-            <small>Text to Russian voice · Текст в голос</small>
+            <small>Text to voice · Текст в голос</small>
           </span>
         </div>
         <p>
