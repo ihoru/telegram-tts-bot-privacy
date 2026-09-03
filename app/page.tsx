@@ -2,30 +2,30 @@ import type { Metadata } from "next";
 import Image from "next/image";
 
 export const metadata: Metadata = {
-  title: { absolute: "Privacy Policy | Vslukh" },
+  title: { absolute: "Privacy Policy | Read Aloud" },
   description:
-    "How Vslukh processes Telegram text and voice notes, in English and Russian.",
+    "How Read Aloud processes Telegram text and voice notes, in English and Russian.",
 };
 
-const effectiveDate = "28 August 2026";
-const effectiveDateRu = "28 августа 2026 года";
+const effectiveDate = "3 September 2026";
+const effectiveDateRu = "3 сентября 2026 года";
 
 export default function Home() {
   return (
     <main>
       <header className="hero">
         <nav className="topbar" aria-label="Policy navigation">
-          <a className="brand" href="#top" aria-label="Vslukh privacy policy">
+          <a className="brand" href="#top" aria-label="Read Aloud privacy policy">
             <Image
-              src="/vslukh-avatar.svg"
+              src="/read-aloud-avatar.svg"
               alt=""
               width={44}
               height={44}
               priority
             />
             <span>
-              <strong>Vslukh</strong>
-              <small>Вслух</small>
+              <strong>Read Aloud</strong>
+              <small>Text to voice</small>
             </span>
           </a>
           <div className="language-links" aria-label="Languages">
@@ -43,7 +43,7 @@ export default function Home() {
             Ваш текст превращается в голосовую заметку, а не в запись в базе данных.
           </p>
           <p className="hero-summary">
-            Vslukh turns text sent in a private Telegram chat into a voice note. This
+            Read Aloud turns text sent in a private Telegram chat into a voice note. This
             page explains the small amount of data needed to do that, what the
             application does not retain, and where Telegram and hosting providers have
             their own responsibilities.
@@ -51,7 +51,7 @@ export default function Home() {
           <div className="policy-meta">
             <span>Effective {effectiveDate}</span>
             <span lang="ru">Действует с {effectiveDateRu}</span>
-            <span>Version 1.2</span>
+            <span>Version 1.3</span>
           </div>
         </div>
 
@@ -85,7 +85,7 @@ export default function Home() {
           i
         </span>
         <div>
-          <strong>Vslukh is an independent bot, not part of Telegram.</strong>
+          <strong>Read Aloud is an independent bot, not part of Telegram.</strong>
           <p>
             Telegram transports your message and the returned voice note under its
             own terms and privacy policy. Local speech generation does not change
@@ -112,13 +112,13 @@ export default function Home() {
               <span>1</span> What the bot processes
             </h3>
             <p>
-              When you message Vslukh, Telegram delivers a message update to the bot.
+              When you message Read Aloud, Telegram delivers a message update to the bot.
               The application uses the text you send or forward, your Telegram
               language code, numeric user ID, chat type, and message/reply identifiers
               needed to localize the response, manage the queue fairly, and reply.
             </p>
             <p>
-              Telegram updates may contain additional message metadata. Vslukh does
+              Telegram updates may contain additional message metadata. Read Aloud does
               not use forwarding details for narration and does not download
               unsupported media.
             </p>
@@ -138,7 +138,7 @@ export default function Home() {
               <li>send that voice note back as a reply.</li>
             </ul>
             <p>
-              Vslukh does not use message content for advertising, profiling, or
+              Read Aloud does not use message content for advertising, profiling, or
               training a speech model.
             </p>
           </section>
@@ -165,11 +165,13 @@ export default function Home() {
               it is never rendered later.
             </p>
             <p>
-              Content-free operational logs may be retained by the bot&apos;s hosting
-              infrastructure. They can include timestamps, event type, character
-              count, processing duration, output byte count, result type, and exception
-              class. Application-authored logs exclude message text, names, usernames,
-              Telegram tokens, and forwarding details.
+              When an operator explicitly enables debug logging, logs include each
+              incoming Telegram update as compact JSON with null-valued fields removed,
+              plus the selected handler name and update ID. These payloads can contain
+              message text, names, usernames, numeric identifiers, forwarding details,
+              file identifiers, and other Telegram metadata. The bot token is not
+              included. The bot&apos;s hosting infrastructure controls log access,
+              retention, rotation, and deletion.
             </p>
           </section>
 
@@ -205,7 +207,7 @@ export default function Home() {
             </h3>
             <p>
               You can stop using the bot at any time and manage your Telegram messages
-              from Telegram. Vslukh has no application account or stored user dataset
+              from Telegram. Read Aloud has no application account or stored user dataset
               to export or delete. The bot is public to anyone who discovers its
               username, and ordinary bot chats are not end-to-end confidential. Do not
               send text that you would not trust to Telegram and the bot host.
@@ -238,7 +240,7 @@ export default function Home() {
               <span>1</span> Какие данные обрабатывает бот
             </h3>
             <p>
-              Когда вы пишете боту &quot;Вслух&quot;, Telegram передает ему обновление с
+              Когда вы пишете боту Read Aloud, Telegram передает ему обновление с
               сообщением. Приложение использует отправленный или пересланный текст, код
               языка Telegram, числовой идентификатор пользователя, тип чата, а также
               идентификаторы сообщения и ответа. Это нужно для выбора языка интерфейса,
@@ -265,7 +267,7 @@ export default function Home() {
               <li>отправить голосовую заметку ответом на сообщение.</li>
             </ul>
             <p>
-              &quot;Вслух&quot; не использует текст сообщений для рекламы, профилирования или
+              Read Aloud не использует текст сообщений для рекламы, профилирования или
               обучения речевой модели.
             </p>
           </section>
@@ -293,11 +295,14 @@ export default function Home() {
               истекает, текст освобождается из памяти, и запрос позже не озвучивается.
             </p>
             <p>
-              Инфраструктура хостинга может сохранять технические журналы без содержимого
-              сообщений: время и тип события, число символов, длительность обработки,
-              размер результата, тип ответа и класс ошибки. Журналы самого приложения не
-              содержат текст сообщений, имена, username, токен Telegram и сведения о
-              пересылке.
+              Если оператор явно включает уровень журналирования DEBUG, журналы содержат
+              каждое входящее обновление Telegram в виде компактного JSON без полей со
+              значением null, а также имя выбранного обработчика и идентификатор
+              обновления. Эти данные могут включать текст сообщения, имена, username,
+              числовые идентификаторы, сведения о пересылке, идентификаторы файлов и
+              другие метаданные Telegram. Токен бота в журналы не включается.
+              Инфраструктура хостинга управляет доступом к журналам, сроком их хранения,
+              ротацией и удалением.
             </p>
           </section>
 
@@ -357,9 +362,9 @@ export default function Home() {
 
       <footer>
         <div>
-          <Image src="/vslukh-avatar.svg" alt="" width={36} height={36} />
+          <Image src="/read-aloud-avatar.svg" alt="" width={36} height={36} />
           <span>
-            <strong>Vslukh · Вслух</strong>
+            <strong>Read Aloud</strong>
             <small>Text to voice · Текст в голос</small>
           </span>
         </div>

@@ -1,6 +1,6 @@
-# Vslukh privacy policy
+# Read Aloud privacy policy
 
-The public bilingual privacy-policy site for the Vslukh Telegram text-to-speech bot.
+The public bilingual privacy-policy site for the Read Aloud Telegram text-to-speech bot.
 It describes the bot application's processing, storage, logging, Telegram boundary,
 and the policy site's own limited data surface in English and Russian.
 

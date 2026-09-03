@@ -3,14 +3,14 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "Vslukh Privacy Policy",
-    template: "%s | Vslukh",
+    default: "Read Aloud Privacy Policy",
+    template: "%s | Read Aloud",
   },
   description:
-    "Bilingual privacy policy for Vslukh, a local-first Telegram text-to-speech bot.",
+    "Bilingual privacy policy for Read Aloud, a local-first Telegram text-to-speech bot.",
   icons: {
-    icon: "/vslukh-avatar.svg",
-    shortcut: "/vslukh-avatar.svg",
+    icon: "/read-aloud-avatar.svg",
+    shortcut: "/read-aloud-avatar.svg",
   },
 };
 

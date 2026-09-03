@@ -29,19 +29,23 @@ test("server-renders the complete bilingual privacy policy", async () => {
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, /<title>Privacy Policy \| Vslukh<\/title>/i);
+  assert.match(html, /<title>Privacy Policy \| Read Aloud<\/title>/i);
+  assert.doesNotMatch(html, new RegExp(["vsl", "ukh"].join(""), "i"));
+  assert.doesNotMatch(html, new RegExp(["вс", "лух"].join(""), "i"));
   assert.match(html, /Your words become a voice note/);
   assert.match(html, /Privacy Policy/);
   assert.match(html, /Политика конфиденциальности/);
-  assert.match(html, /28 August 2026/);
-  assert.match(html, /28 августа 2026 года/);
-  assert.match(html, /Version 1\.2/);
+  assert.match(html, /3 September 2026/);
+  assert.match(html, /3 сентября 2026 года/);
+  assert.match(html, /Version 1\.3/);
   assert.match(html, /at most ten minutes before rendering starts/i);
   assert.match(html, /Accepted work and queue state are not persisted/i);
   assert.match(html, /Queue state is used only for capacity, fairness, progress, rendering, and replies/i);
   assert.match(html, /не более десяти минут до начала озвучивания/i);
   assert.match(html, /Принятые задачи и состояние очереди не сохраняются/i);
   assert.match(html, /используется только для ограничения вместимости/i);
+  assert.match(html, /incoming Telegram update as compact JSON/i);
+  assert.match(html, /каждое входящее обновление Telegram/i);
   assert.match(html, /Qwen3-TTS or Silero/);
   assert.match(html, /no cloud TTS provider receives the text/i);
   assert.match(html, /не передается облачному TTS-провайдеру/i);
