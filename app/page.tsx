@@ -368,6 +368,9 @@ export default function Home() {
             <small>Text to voice · Текст в голос</small>
           </span>
         </div>
+        <a href="https://github.com/ihoru/telegram-tts-bot" rel="noreferrer">
+          Source code on GitHub
+        </a>
         <p>
           Effective {effectiveDate}
           <br />
